@@ -1,8 +1,8 @@
 
 from anytree import Node, RenderTree
 import re
-# file1 = open('dayInput.txt', 'r')
-file1 = open('exData.txt', 'r')
+file1 = open('dayInput.txt', 'r')
+# file1 = open('exData.txt', 'r')
 data = file1.readlines()
 data = [line.strip() for line in data]
 
@@ -33,8 +33,13 @@ def getDirSize(dirName, dirDict):
         matching = [s for s in dirList if "dir" in s]        
         dirSize = 0
         for dir in matching:
-            # print("Going recursive!!!!")
-            dirSize += getDirSize(dir.split()[-1], dirDict)
+            dirPath = ""
+            if dirName != "/":
+                dirPath += dirName + "/" + dir.split()[-1]
+            else:
+                dirPath += dirName + dir.split()[-1]
+
+            dirSize += getDirSize(dirPath, dirDict)
         for x in dirList:
             if "dir" not in x:
                 dirSize += getItemSize(x)
@@ -47,7 +52,7 @@ def getDirSize(dirName, dirDict):
             match = re.search(r'\d+', item)
             if match:
                 dirSize += int(match.group())
-        # print(f"dir {dirName} is size {dirSize}")
+        # print(f"dir {dirName} is size {dirSize}")        
         return dirSize            
                
     
@@ -74,31 +79,29 @@ for x in range(len(data)):
         elif cdCmd == "/":
             cwd = "/"
         else: 
-            if cwd is "/":
+            if cwd == "/":
                 cwd += cdCmd
             else:
                 cwd += "/" + cdCmd
-        print(cwd)
-
 
 print("~~~~~~~ File Struct ~~~~~~~")
 for dirName in dirDict:
     print(f"{dirName} : {dirDict[dirName]}")
 
 #Calculate it!
-# print ("====== Calculating sizes =======")
-# dirSizeDict = {}
+print ("====== Calculating sizes =======")
+dirSizeDict = {}
 
-# for dirName in dirDict:
-#     dirSizeDict.update({dirName : getDirSize(dirName, dirDict)})
+for dirName in dirDict:
+    dirSizeDict.update({dirName : getDirSize(dirName, dirDict)})
 
-# sumOfDirSizes = 0
-# for dirName in dirSizeDict:
-#     dirSize = dirSizeDict[dirName]
-#     if dirSize <= 100000 :
-#         print(f"Adding dir {dirName} : {dirSize}")
-#         sumOfDirSizes += dirSize
-# print(f"Output: {sumOfDirSizes}")
+sumOfDirSizes = 0
+for dirName in dirSizeDict:
+    dirSize = dirSizeDict[dirName]
+    if dirSize <= 100000 :
+        print(f"Adding dir {dirName} : {dirSize}")
+        sumOfDirSizes += dirSize
+print(f"Output: {sumOfDirSizes}")
 
         
   
