@@ -46,8 +46,7 @@ for y in range(rows):
             visibleNorth = walkNorth(tree, x, y)
             visibleSouth = walkSouth(tree, x, y)
             visibleEast = walkEast(tree, x, y)
-            visibleWest = walkWest(tree, x, y)
-            # print(f"Tree {tree} {x},{y} N:{visibleNorth} S:{visibleSouth} E:{visibleEast} W:{visibleWest} ")
+            visibleWest = walkWest(tree, x, y)            
             if visibleNorth or visibleSouth or visibleEast or visibleWest:                                
                 visibleTreeCount += 1
 
