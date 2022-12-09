@@ -1,6 +1,6 @@
 from array import *
-# file1 = open('input.txt', 'r')
-file1 = open('exData.txt', 'r')
+file1 = open('input.txt', 'r')
+# file1 = open('exData.txt', 'r')
 rules = [line.strip() for line in file1.readlines()]
 
 class Point:
@@ -17,23 +17,24 @@ class Point:
 
 
 def isHAbove(hLoc, tLoc):    
-    if hLoc.col is tLoc.col and hLoc.row > tLoc.row : return True
+    if hLoc.col == tLoc.col and hLoc.row > tLoc.row : return True
     return False
 
 def isHBelow(hLoc, tLoc):
-    if hLoc.col is tLoc.col and hLoc.row < tLoc.row : return True
+    if hLoc.col == tLoc.col and hLoc.row < tLoc.row : return True
     return False
 
 def isHLeft(hLoc, tLoc):
-    if hLoc.row is tLoc.row and hLoc.col < tLoc.col: return True
+    # print(f"isLeft: {hLoc.row}, {tLoc.row} : {hLoc.row == tLoc.row} and {hLoc.col < tLoc.col}")
+    if hLoc.row == tLoc.row and hLoc.col < tLoc.col: return True
     return False
 
 def isHRight(hLoc, tLoc) :
-    if hLoc.row is tLoc.row and hLoc.col > tLoc.col: return True
+    if hLoc.row == tLoc.row and hLoc.col > tLoc.col: return True
     return False
 
 def isDiagHTL(hLoc, tLoc) :
-    if hLoc.col > tLoc.col and hLoc.row < tLoc.row: return True
+    if hLoc.col < tLoc.col and hLoc.row > tLoc.row: return True
     return False
 
 def isDiagHTR(hLoc, tLoc) :
@@ -45,7 +46,7 @@ def isDiagHBL(hLoc, tLoc) :
     return False
 
 def isDiagHBR(hLoc, tLoc) :
-    if hLoc.col < tLoc.col and hLoc.row > tLoc.row: return True
+    if hLoc.col > tLoc.col and hLoc.row < tLoc.row: return True
     return False
 
 # TODO - this is failing
@@ -124,8 +125,8 @@ for rule in rules:
                 locationsBeen.append(tLoc)
 
     print("\n")
-for loc in locationsBeen:
-    print(loc)
+# for loc in locationsBeen:
+#     print(loc)
     
 print(f"Output: {len(locationsBeen)}")
 
