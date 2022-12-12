@@ -74,7 +74,7 @@ def moving(hLoc, tLoc):
         return Point(tLoc.col, tLoc.row + 1)
     elif isHBelow(hLoc, tLoc):
         print("Moving D")
-        return Point(tLoc.col, tLoc.row + - 1)
+        return Point(tLoc.col, tLoc.row - 1)
     elif isHLeft(hLoc, tLoc):
         print("Moving L")  
         return Point(tLoc.col - 1, tLoc.row)
@@ -89,7 +89,7 @@ def moving(hLoc, tLoc):
         return Point(tLoc.col - 1, tLoc.row + 1)
     elif isDiagHBR(hLoc, tLoc):
         print("Moving Dia BR")      
-        return Point(tLoc.col + 1, tLoc.row + 1)
+        return Point(tLoc.col + 1, tLoc.row - 1)
     elif isDiagHBL(hLoc, tLoc):
         print("Moving Dia BL")      
         return Point(tLoc.col - 1, tLoc.row - 1)
@@ -120,7 +120,6 @@ for rule in rules:
             tLoc = moving(hLoc, tLoc)   
 
         print(f"New Tail Location: {tLoc}")
-
         if tLoc not in locationsBeen:
                 locationsBeen.append(tLoc)
 
